@@ -8,35 +8,35 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
 public class UserEntity implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 
 	@Column(length = 100, nullable = false)
 	private String name;
-	
+
 	@Column(length = 100, nullable = false)
 	private String email;
-	
+
 	@JsonIgnore
 	@Column(length = 100, nullable = false)
 	private String password;
-	
+
 	@Enumerated(EnumType.ORDINAL)
 	private TypeUser type;
+
+	// NOVOS CAMPOS
+	@Column(length = 50)
+	private String avatar; // Ex: "dog", "cat"
+
+	@Column(length = 500)
+	private String bio;
 
 	public UUID getId() {
 		return id;
@@ -78,19 +78,29 @@ public class UserEntity implements UserDetails {
 		this.type = type;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getUsername() {
-		
 		return this.email;
 	}
-	
-	
-	
-	
 }
