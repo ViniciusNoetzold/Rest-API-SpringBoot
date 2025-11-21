@@ -16,15 +16,14 @@ public class AnimalEntity {
     private String especie;
     private String descricao;
 
-    // Campo de cor para o mapa (Ex: #FF0000)
+    // Campo adicionado para salvar a cor do pino do mapa
     private String color;
 
-    // Mantemos o campo no banco por compatibilidade, mas não será usado
-    // obrigatoriamente
     private String fotoPath;
 
     private boolean isAdotado = false;
 
+    // --- LOCALIZAÇÃO (PIN) ---
     private double latitude;
     private double longitude;
 
@@ -35,6 +34,8 @@ public class AnimalEntity {
 
     public AnimalEntity() {
     }
+
+    // --- GETTERS E SETTERS ---
 
     public UUID getId() {
         return id;
